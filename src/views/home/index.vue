@@ -31,9 +31,9 @@ const toSettlement = () => {
         name: 'settlement'
     })
 }
-const toplayExamine = () => {
+const toMyProject = () => {
     router.push({
-        name: 'playexamine'
+        name: 'project'
     })
 }
 </script>
@@ -68,9 +68,9 @@ const toplayExamine = () => {
                 <img src="../../assets/svg/dysh.svg" alt=""  class="right-img" />
                 <span class="add-text">导游审核</span>
             </div>
-            <div class="main-right-item" @click="toplayExamine">
+            <div class="main-right-item" @click="toMyProject">
                 <img src="../../assets/svg/ywsh.svg" alt=""  class="right-img" />
-                <span class="add-text">游玩审核</span>
+                <span class="add-text">我的项目</span>
             </div>
        </div>
     </div>
