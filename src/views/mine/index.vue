@@ -32,11 +32,6 @@ const tomyGuide = () => {
         name: 'myguide'
     })
 }
-const toplayHis = () => {
-    router.push({
-        name: 'playhis'
-    })
-}
 const tojiesuanhis = () => {
     router.push({
         name: 'jiesuanhis'
@@ -89,11 +84,6 @@ function toOrder(){
     <div class="nav-item" @click="toguidehis">
         <van-icon name="wap-home-o" class="left-icon" />
         <span>导游审核历史</span>
-        <van-icon name="arrow" class="right-icon" />
-    </div>
-    <div class="nav-item" @click="toplayHis">
-        <van-icon name="wap-nav" class="left-icon" />
-        <span>游玩审核历史</span>
         <van-icon name="arrow" class="right-icon" />
     </div>
     <div class="nav-item"  @click="tojiesuanhis">

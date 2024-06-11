@@ -105,22 +105,6 @@ const routes = [
         }
     },
     {
-        path: '/playexamine',
-        name: 'playexamine',
-        component: () => import('@/views/merchant/playExamine.vue'),
-        meta: {
-            title: '游玩审核'
-        }
-    },
-    {
-        path: '/playhis',
-        name: 'playhis',
-        component: () => import('@/views/merchant/playHis.vue'),
-        meta: {
-            title: '游玩审核历史'
-        }
-    },
-    {
         path: '/jiesuanhis',
         name: 'jiesuanhis',
         component: () => import('@/views/merchant/jiesuanHis.vue'),
