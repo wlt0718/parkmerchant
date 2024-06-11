@@ -1,1 +1,0 @@
-import{d as a}from"./index.esm-Pm4_1N2A.js";import{o as n,e as h,w as u}from"./use-route-B7CSn7qS.js";import{r as m,C as p,H as s,A as c}from"./index-Fxc2rSLZ.js";const g=(i,r)=>{const o=m(),t=()=>{o.value=a(i).height};return p(()=>{if(s(t),r)for(let e=1;e<=3;e++)setTimeout(t,100*e)}),n(()=>s(t)),c([h,u],t),o};export{g as u};

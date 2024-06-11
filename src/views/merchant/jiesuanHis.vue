@@ -2,6 +2,8 @@
 import { ref, reactive, computed, watch } from 'vue';
 import { userPlayListStore } from '../../stores/playlist.js'
 import { showDialog } from 'vant';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const checkProject = ref('100000')
 const checkGuide = ref('1')
 const checkDate = ref('all')
@@ -44,6 +46,11 @@ function onConfirm(value){
   const state = value[0].getMonth() + 1 + '月'+value[0].getDate() + '日' 
   const end = value[1].getMonth() + 1 + '月'+value[1].getDate() + '日' 
   customDate.value = state + '-' + end
+}
+function toinfo(){
+    router.push({
+        name: 'info'
+    })
 }
 const data = ref([
     {
@@ -143,43 +150,25 @@ const data = ref([
   allow-same-day position="top"
 />
 <div class="store">
-    <div v-for="item in data" :key="item.id" class="store-item">
+    <template v-for="item in data" :key="item.id" >
+    <div class="store-item">
+        <van-checkbox v-model="item.isCheck" :name="item.id" class="checkbox"></van-checkbox>
         <div class="item-left">
-            <div class="item-left-i">
-                <span class="card-left">导游：</span>
-                <span class="card-right">{{ item.guideName }}</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">项目：</span>
-                <span class="card-right">{{ item.project }}</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">游玩人数：</span>
-                <span class="card-right">{{ item.num }} 人</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">项目费用：</span>
-                <span class="card-right">{{ item.amount }} 元/人</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">佣金比例：</span>
-                <span class="card-right">{{ item.proportion }} %</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">佣金：</span>
-                <span class="card-right">{{ item.income }} 元</span>
-            </div>
-            <div class="item-left-i time">
-                <span class="card-left">时间：</span>
-                <span class="card-right">{{ item.time }}</span>
-            </div>
+            <div class="name">导游：{{ item.guideName }}</div>
+            <div>项目：{{ item.project }}</div>
+            <div>带客批次：激流勇进20240430001</div>
+            <div>结算金额：<span class="red">￥50.00</span></div>
         </div>
-        <div class="item-right">
-            <div class="status" v-if="item.status === 1" style="background-color: #67c23a">结算成功</div>
-            <div class="status" v-if="item.status === 0" style="background-color: #E6A23C">暂未结算</div>
-            <div class="status" v-if="item.status === 2" style="background-color: #f56c6c">结算失败</div>
+        <div class="right">
+            <div v-if="item.status === 0" style="color: #E6A23C">未结算</div>
+            <div v-if="item.status === 1" style="color: #67c23a">结算成功</div>
+            <div v-if="item.status === 2" style="color: #f56c6c">结算失败</div>
+            <div class="btn">
+                <van-button color="#5075FF" size="mini" round  @click="toinfo">查看详情</van-button>
+            </div>
         </div>
     </div>
+    </template>
 </div>
 </template>
 <style scoped lang="scss">
@@ -209,31 +198,27 @@ const data = ref([
 }
 
 .item-left {
-    width: 0;
-    flex-grow: 1;
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 12px;
-  }
-  .item-left-i {
-    width: 50%;
-    font-size: 12px;
-    margin-bottom: 10px;
-  }
-  .item-left-i.time {
-    width: 100%;
-    margin-bottom: 0;
-  }
-  .item-right {
-    flex-shrink: 0;
-    width: 70px;
-    font-size: 12px;
-    text-align: center;
-  }
-  .status {
-    padding: 6px 8px;
-    color: #fff;
-    background-color: aqua;
-    border-radius: 6px;
-  }
+        flex-grow: 1;
+        font-size: 13px;
+        color: #333333;
+        div {
+            margin-bottom: 8px;
+        }
+        div:last-child {
+            margin-bottom: 0;
+        }
+        .name {
+            font-size: 15px;
+        }
+        .red {
+            color: #ee0a24;
+            font-size: 14px;
+        }
+    }
+    .right {
+        .btn {
+            text-align: right;
+            margin-top: 15px;
+        }
+    }
 </style>

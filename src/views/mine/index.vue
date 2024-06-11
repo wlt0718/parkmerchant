@@ -1,9 +1,16 @@
 <script setup>
 import { userInfoStore } from '../../stores/user.js'
 import { useRouter } from 'vue-router'
+import { ref,reactive } from 'vue';
 const infoStore = userInfoStore()
 const router = useRouter()
-
+const popupShow = ref(false)
+const qrcodeValue = reactive({
+  color: { dark: '#000000ff', light: '#ffffff' },
+  type: 'image/png',
+  value: 'https://wlt0718.github.io/park-visitor/#/merchantinfo',
+  width: 300
+})
 const reviseMyInfo = () => {
     router.push({
         name: 'merchantRevise'
@@ -40,6 +47,11 @@ const toguidehis = () =>{
         name: 'guidehis'
     })
 }
+function toOrder(){
+    router.push({
+        name: 'order'
+    })
+}
 </script>
 <template>
 <div class="header">
@@ -59,9 +71,19 @@ const toguidehis = () =>{
         <span>我的项目</span>
         <van-icon name="arrow" class="right-icon" />
     </div>
+    <div class="nav-item" @click="popupShow= true">
+        <van-icon name="wap-home-o" class="left-icon" />
+        <span>我的二维码</span>
+        <van-icon name="arrow" class="right-icon" />
+    </div>
     <div class="nav-item" @click="tomyGuide">
         <van-icon name="wap-home-o" class="left-icon" />
         <span>名下导游</span>
+        <van-icon name="arrow" class="right-icon" />
+    </div>
+    <div class="nav-item" @click="toOrder">
+        <van-icon name="wap-home-o" class="left-icon" />
+        <span>游客订单</span>
         <van-icon name="arrow" class="right-icon" />
     </div>
     <div class="nav-item" @click="toguidehis">
@@ -80,6 +102,25 @@ const toguidehis = () =>{
         <van-icon name="arrow" class="right-icon" />
     </div>
 </div>
+<van-popup v-model:show="popupShow" position="bottom"
+  closeable 
+    round :style="{height:'95%'}"
+>
+    <div class="order">
+      <div class="body">
+        <div class="name">上海迪士尼</div>
+        <div class="desc">
+          游客扫码下单
+        </div>
+      </div>
+      <div class="couponlist">
+        <vue-qrcode :value="qrcodeValue.value" :width="qrcodeValue.width" :type="qrcodeValue.type"
+          :color="qrcodeValue.color"
+        >
+        </vue-qrcode>
+      </div>
+    </div>
+  </van-popup>
 </template>
 <style lang="scss" scoped>
 .header {
@@ -146,5 +187,33 @@ const toguidehis = () =>{
         font-size: 20px;
         color: #666666;
     }
+}
+.order {
+  padding-top: 15px;
+  margin-top: 80px;
+  background-color: #ffffff;
+  text-align: center;
+  img {
+    margin: 0 auto;
+    width: 300px;
+  }
+  .body {
+    text-align: center;
+    .name {
+        font-size: 16px;
+        color: #333333;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    .desc {
+      font-size: 14px;
+      color: #999999;
+    }
+  }
+}
+.time {
+  font-size: 14px;
+  color: #333333;
+  margin-bottom: 20px;
 }
 </style>

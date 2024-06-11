@@ -2,6 +2,8 @@
 import { ref, reactive, computed, watch } from 'vue';
 import { userPlayListStore } from '../../stores/playlist.js'
 import { showDialog } from 'vant';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const checkProject = ref('100000')
 const checkGuide = ref('1')
 const checkDate = ref('date')
@@ -189,6 +191,11 @@ function examineno(){
         })
     }).catch(() => {})
 }
+function toinfo(){
+    router.push({
+        name: 'info'
+    })
+}
 </script>
 <template>
 <van-dropdown-menu>
@@ -204,33 +211,15 @@ function examineno(){
     <div class="store-item" v-if="item.status === 0">
         <van-checkbox v-model="item.isCheck" :name="item.id" class="checkbox"></van-checkbox>
         <div class="item-left">
-            <div class="item-left-i">
-                <span class="card-left">导游：</span>
-                <span class="card-right">{{ item.guideName }}</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">项目：</span>
-                <span class="card-right">{{ item.project }}</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">游玩人数：</span>
-                <span class="card-right">{{ item.num }} 人</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">项目费用：</span>
-                <span class="card-right">{{ item.amount }} 元/人</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">佣金比例：</span>
-                <span class="card-right">{{ item.proportion }} %</span>
-            </div>
-            <div class="item-left-i">
-                <span class="card-left">结算金额：</span>
-                <span class="card-right">{{ item.income }} 元</span>
-            </div>
-            <div class="item-left-i time">
-                <span class="card-left">时间：</span>
-                <span class="card-right">{{ item.time }}</span>
+            <div class="name">导游：{{ item.guideName }}</div>
+            <div>项目：{{ item.project }}</div>
+            <div>带客批次：激流勇进20240430001</div>
+            <div>结算金额：<span class="red">￥50.00</span></div>
+        </div>
+        <div class="right">
+            <div style="color: #E6A23C">未结算</div>
+            <div class="btn">
+                <van-button color="#5075FF" size="mini" round @click="toinfo">查看详情</van-button>
             </div>
         </div>
     </div>
@@ -253,31 +242,42 @@ function examineno(){
 }
 .store-item {
     margin: 0 12px 12px;
-    padding: 12px;
+    padding: 10px;
     background-color: #ffffff;
     border-radius: 6px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     line-height: 1;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px 1px rgba($color: #000000, $alpha: 0.2);
+    border-radius: 7px;
+    box-shadow: 0px 0px 4px 0px rgba($color: #000000, $alpha: 0.1);
     .checkbox {
         flex-shrink: 0;
-        margin-right: 20px;
+        margin-right: 15px;
     }
     .item-left {
         flex-grow: 1;
-    }
-    .item-left-i {
-        font-size: 14px;
-        margin-bottom: 8px;
-        color: #666666;
-        &:last-child {
+        font-size: 13px;
+        color: #333333;
+        div {
+            margin-bottom: 8px;
+        }
+        div:last-child {
             margin-bottom: 0;
         }
+        .name {
+            font-size: 15px;
+        }
+        .red {
+            color: #ee0a24;
+            font-size: 14px;
+        }
     }
-
+    .right {
+        .btn {
+            margin-top: 15px;
+        }
+    }
 }
 .footer {
     width: 100%;
@@ -316,19 +316,4 @@ function examineno(){
         border: 1px solid #f56c6c;
     }
 }
-.item-left {
-    width: 0;
-    flex-grow: 1;
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 12px;
-  }
-  .item-left-i {
-    width: 50%;
-    margin-bottom: 10px;
-  }
-  .item-left-i.time {
-    width: 100%;
-    margin-bottom: 0;
-  }
 </style>

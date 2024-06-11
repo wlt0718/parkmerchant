@@ -128,6 +128,22 @@ const routes = [
             title: '结算历史'
         }
     },
+    {
+        path: '/order',
+        name: 'order',
+        component: () => import('@/views/mine/order.vue'),
+        meta: {
+            title: '游客订单'
+        }
+    },
+    {
+        path: '/info',
+        name: 'info',
+        component: () => import('@/views/mine/info.vue'),
+        meta: {
+            title: '带客详情'
+        }
+    },
 ]
 const router = createRouter({
     history: createWebHashHistory(),

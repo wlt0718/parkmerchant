@@ -94,70 +94,37 @@ const data = ref([
   allow-same-day position="top"
 />
 <div class="store">
-    <div v-for="item in data" :key="item.id" class="store-item">
-        <div class="item-left">
-            <div class="item-left-i">导游名：{{ item.guideName }}</div>
-            <div class="item-left-i">所属导游团：{{ item.guideTeam }}</div>
-            <div class="item-left-i">联系方式：{{ item.mobile }}</div>
-            <div class="item-left-i">申请时间：{{ item.time }}</div>
-        </div>
-        <div class="item-right">
-            <div class="status" v-if="item.status === 1" style="background-color: #67c23a">审核通过</div>
-            <div class="status" v-if="item.status === 0" style="background-color: #E6A23C">暂未审核</div>
-            <div class="status" v-if="item.status === 2" style="background-color: #f56c6c">审核拒绝</div>
-        </div>
-    </div>
+  <page-hisbody v-for="item in data" :key="item.id">
+    <div class="item name">导游名：<span>{{ item.guideName }}</span></div> 
+    <div class="item">所属导游团：{{ item.guideTeam }}</div>
+    <div class="item">联系方式：{{ item.mobile }}</div>
+    <div class="item">申请时间：{{ item.time }}</div>
+    <template #right>
+      <page-label radius type="success" v-if="item.status === 1">审核通过</page-label>
+      <page-label radius type="warning" v-if="item.status === 0">暂未审核</page-label>
+      <page-label radius type="danger" v-if="item.status === 2">审核失败</page-label>
+    </template>
+  </page-hisbody>
 </div>
+<page-button type="primary" disabled>申请</page-button>
 </template>
 <style scoped lang="scss">
 .store {
-    padding-top: 10px;
-    padding-bottom: 70px;
+  padding-top: 10px;
+  padding-bottom: 70px;
 }
-.store-item {
-    margin: 0 12px 12px;
-    padding: 12px;
-    background-color: #ffffff;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    line-height: 1;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px 1px rgba($color: #000000, $alpha: 0.2);
-    .item-left {
-        flex-grow: 1;
+.item {
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: #666666;
+  &.name {
+    font-size: 14px;
+    span {
+      color: #303030;
     }
-
-}
-
-.item-left {
-    width: 0;
-    flex-grow: 1;
-    font-size: 12px;
   }
-  .item-left-i {
-        font-size: 14px;
-        margin-bottom: 8px;
-        color: #666666;
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-  .item-left-i.time {
-    width: 100%;
+  &:last-child {
     margin-bottom: 0;
   }
-  .item-right {
-    flex-shrink: 0;
-    width: 70px;
-    font-size: 12px;
-    text-align: center;
-  }
-  .status {
-    padding: 6px 8px;
-    color: #fff;
-    background-color: aqua;
-    border-radius: 6px;
-  }
+}
 </style>
