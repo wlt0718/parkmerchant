@@ -8,7 +8,7 @@ const popupShow = ref(false)
 const qrcodeValue = reactive({
   color: { dark: '#000000ff', light: '#ffffff' },
   type: 'image/png',
-  value: 'https://wlt0718.github.io/park-visitor/#/merchantinfo',
+  value: 'https://wlt0718.github.io/park-visitor/#/merchantinfo?type=m',
   width: 300
 })
 const reviseMyInfo = () => {
@@ -50,15 +50,18 @@ function toOrder(){
 </script>
 <template>
 <div class="header">
-    <div class="userinfo">
-        <div class="name">
-            <span>{{ infoStore.name }}</span>
-            <span class="label">商家</span>
+    <div class="header-name">
+        <div class="userinfo">
+            <div class="name">
+                <span>{{ infoStore.name }}</span>
+                <span class="label">商家</span>
+            </div>
+        </div>
+        <div class="change">
+            <span @click="reviseMyInfo">修改信息</span>
         </div>
     </div>
-    <div class="change">
-        <span @click="reviseMyInfo">修改信息</span>
-    </div>
+    <div class="adress">地址： {{ infoStore.address }}</div>
 </div>
 <div class="nav-list">
     <div class="nav-item" @click="toMyproject">
@@ -66,7 +69,7 @@ function toOrder(){
         <span>我的项目</span>
         <van-icon name="arrow" class="right-icon" />
     </div>
-    <div class="nav-item" @click="popupShow= true">
+    <div class="nav-item" @click="popupShow = true">
         <van-icon name="wap-home-o" class="left-icon" />
         <span>我的二维码</span>
         <van-icon name="arrow" class="right-icon" />
@@ -116,37 +119,36 @@ function toOrder(){
 .header {
     background-color: #fff;
     width: 100%;
-    padding: 24px 20px;
-    padding-right: 12px;
+    padding: 20px 12px 12px;
     line-height: 1;
-    display: flex;
-    justify-content: space-between;
+    .header-name {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
     .userinfo {
         .name {
-            font-size: 20px;
-            margin-bottom: 14px;
+            font-size: 18px;
             display: flex;
             align-items: center;
             .label {
                 margin-left: 15px;
-                padding: 4px 10px 3px;
+                padding: 4px 10px;
                 border-radius: 3px;
                 background-color: #881391;
                 font-size: 12px;
                 color: #fff;
             }
         }
-        .team {
-            font-size: 12px;
-            color: #666666;
-            & :first-child {
-                margin-right: 6px;
-            }
-        }
     }
     .change {
         color: #5075ff;
         font-size: 14px;
+    }
+    .adress {
+        font-size: 12px;
+        color: #999999;
     }
 }
 .nav-list {

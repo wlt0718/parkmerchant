@@ -27,7 +27,7 @@ div, ul, li {
   box-sizing: border-box;
   line-height: 1;
 }
-input {
+input, textarea {
   background-color: transparent;
   outline: none;
   border: none;
