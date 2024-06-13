@@ -18,7 +18,7 @@ function toinfo(id){
 <div class="headeraaa">
   <div class="title">带客信息</div>
   <div>导游：导游一</div>
-  <div>带客编号：激流勇进20240430001</div>
+  <div>带客游玩批次：1003202406060001</div>
 </div>
 <div class="tips">
     详情：
