@@ -6,7 +6,6 @@ import { showConfirmDialog } from 'vant';
 import { useRouter } from 'vue-router'
 const userOrder = userOrderListStore()
 const router = useRouter()
-const value1 = ref(0);
 const value2 = ref('a');
 const value3 = ref('z');
 const checkDate = ref('date')
@@ -30,11 +29,6 @@ const dateList = ref([
   { text: '本月', value: 'month' },
   { text: `自定义时间${customDate.value}`, value: 'custom' },
 ])
-const option1 = [
-  { text: '全部导游', value: 0 },
-  { text: '导游一', value: 1 },
-  { text: '导游二', value: 2 },
-];
 const option2 = [
   { text: '全部项目', value: 'a' },
   { text: '项目二', value: 'b' },
@@ -72,7 +66,6 @@ function changeStatus(item){
 <van-sticky>
 <van-dropdown-menu active-color="#ee0a24">
   <van-dropdown-item v-model="value2" :options="option2" />
-  <van-dropdown-item v-model="value1" :options="option1" />
   <van-dropdown-item v-model="checkDate" :options="dateList" @change="dateChange" />
   <van-dropdown-item v-model="value3" :options="option3" />
 </van-dropdown-menu>
