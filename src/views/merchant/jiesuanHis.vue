@@ -62,24 +62,38 @@ const data = ref([
         proportion: 5,
         income: 30,
         time: '2024年04月29日 11:30:30',
-        status: 1,
+        status: 0,
         isCheck: false,
     },
     {
         id: 1,
-        guideName: '导游一',
+        guideName: '导游二',
         project: '快艇',
         num: 20,
         amount: 60,
         proportion: 5,
         income: 30,
         time: '2024年04月29日 11:30:30',
-        status: 1,
+        status: 0,
         isCheck: false,
+        guideOrder: '1003202406060011',
     },
     {
         id: 2,
-        guideName: '导游一',
+        guideName: '导游三',
+        project: '快艇',
+        num: 20,
+        amount: 60,
+        proportion: 5,
+        income: 30,
+        time: '2024年04月29日 11:30:30',
+        status: 0,
+        isCheck: false,
+        guideOrder: '1003202406060012',
+    },
+    {
+        id: 3,
+        guideName: '导游四',
         project: '快艇',
         num: 20,
         amount: 60,
@@ -88,60 +102,38 @@ const data = ref([
         time: '2024年04月29日 11:30:30',
         status: 1,
         isCheck: false,
-    },
-    {
-        id: 3,
-        guideName: '导游一',
-        project: '快艇',
-        num: 20,
-        amount: 60,
-        proportion: 5,
-        income: 30,
-        time: '2024年04月29日 11:30:30',
-        status: 2,
-        isCheck: false,
+        guideOrder: '1003202406060013',
     },
     {
         id: 4,
-        guideName: '导游一',
+        guideName: '导游五',
         project: '快艇',
         num: 20,
         amount: 60,
         proportion: 5,
         income: 30,
         time: '2024年04月29日 11:30:30',
-        status: 0,
+        status: 1,
         isCheck: false,
+        guideOrder: '1003202406060014',
     },
     {
         id: 5,
-        guideName: '导游一',
+        guideName: '导游六',
         project: '快艇',
         num: 20,
         amount: 60,
         proportion: 5,
         income: 30,
         time: '2024年04月29日 11:30:30',
-        status: 2,
+        status: 1,
         isCheck: false,
-    },
-    {
-        id: 6,
-        guideName: '导游一',
-        project: '快艇',
-        num: 20,
-        amount: 60,
-        proportion: 5,
-        income: 30,
-        time: '2024年04月29日 11:30:30',
-        status: 0,
-        isCheck: false,
+        guideOrder: '1003202406060015',
     },
 ])
 </script>
 <template>
 <van-dropdown-menu>
-  <van-dropdown-item v-model="checkProject" :options="projectList" />
   <van-dropdown-item v-model="checkGuide" :options="guideList" />
   <van-dropdown-item v-model="checkStatus" :options="statusList" />
   <van-dropdown-item v-model="checkDate" :options="dateList" @change="dateChange" />
@@ -151,23 +143,23 @@ const data = ref([
 />
 <div class="store">
     <template v-for="item in data" :key="item.id" >
-    <div class="store-item">
-        <van-checkbox v-model="item.isCheck" :name="item.id" class="checkbox"></van-checkbox>
-        <div class="item-left">
-            <div class="name">导游：{{ item.guideName }}</div>
-            <div>项目：{{ item.project }}</div>
-            <div>带客批次：激流勇进20240430001</div>
-            <div>结算金额：<span class="red">￥50.00</span></div>
-        </div>
-        <div class="right">
-            <div v-if="item.status === 0" style="color: #E6A23C">未结算</div>
-            <div v-if="item.status === 1" style="color: #67c23a">结算成功</div>
-            <div v-if="item.status === 2" style="color: #f56c6c">结算失败</div>
-            <div class="btn">
-                <van-button color="#5075FF" size="mini" round  @click="toinfo">查看详情</van-button>
+        <div class="store-item">
+            <div class="item-left">
+                <div class="name">导游：{{ item.guideName }}</div>
+                <div>带客游玩批次：{{ item.guideOrder }}</div>
+                <div>时间：{{ item.time }}</div>
+                <div>结算金额：<span class="red">￥{{ item.amount }}</span></div>
+            </div>
+            <div class="right">
+                <div>
+                    <div v-if="item.status === 0" style="color: #E6A23C">未结算</div>
+                    <div v-if="item.status === 1" style="color: #67c23a">结算成功</div>
+                </div>
+                <div class="btn">
+                    <van-button color="#5075FF" size="mini" round @click="toinfo" block>查看详情</van-button>
+                </div>
             </div>
         </div>
-    </div>
     </template>
 </div>
 </template>
@@ -182,25 +174,19 @@ const data = ref([
     background-color: #ffffff;
     border-radius: 6px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     line-height: 1;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px 1px rgba($color: #000000, $alpha: 0.2);
+    border-radius: 7px;
+    box-shadow: 0px 0px 4px 0px rgba($color: #000000, $alpha: 0.1);
     .checkbox {
         flex-shrink: 0;
-        margin-right: 20px;
+        margin-right: 15px;
     }
     .item-left {
         flex-grow: 1;
-    }
-
-}
-
-.item-left {
-        flex-grow: 1;
         font-size: 13px;
-        color: #333333;
+        color: #999999;
         div {
             margin-bottom: 8px;
         }
@@ -216,9 +202,13 @@ const data = ref([
         }
     }
     .right {
+        width: 60px;
+        text-align: right;
+        font-size: 13px;
         .btn {
-            text-align: right;
+            width: 60px;
             margin-top: 15px;
         }
     }
+}
 </style>

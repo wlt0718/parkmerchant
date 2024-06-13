@@ -1,8 +1,10 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import { userInfoStore } from '../../stores/user.js'
+import { userOrderListStore } from '../../stores/order.js'
+
 import { showConfirmDialog } from 'vant';
 import { useRouter } from 'vue-router'
+const userOrder = userOrderListStore()
 const router = useRouter()
 const value1 = ref(0);
 const value2 = ref('a');
@@ -43,20 +45,22 @@ const option3 = [
   { text: '已下单', value: 'x' },
   { text: '已完成', value: 'c' },
 ];
-function toinfo(){
+function toinfo(id){
     router.push({
-        name: 'orderinfo',
+        path: '/orderinfo',
+        query: {
+          id: id
+        }
     })
 }
-const btnshow = ref(true)
-function changeStatus(){
+function changeStatus(item){
     showConfirmDialog({
       title: '提示',
       message:
         '是否将该订单设置为已完成？',
     })
       .then(() => {
-        btnshow.value = false
+        userOrder.Set_list_status(item.id)
         // on confirm
       })
       .catch(() => {
@@ -65,113 +69,37 @@ function changeStatus(){
 }
 </script>
 <template>
+<van-sticky>
 <van-dropdown-menu active-color="#ee0a24">
   <van-dropdown-item v-model="value2" :options="option2" />
   <van-dropdown-item v-model="value1" :options="option1" />
   <van-dropdown-item v-model="checkDate" :options="dateList" @change="dateChange" />
   <van-dropdown-item v-model="value3" :options="option3" />
 </van-dropdown-menu>
+</van-sticky>
 <!-- 日期区间 -->
 <van-calendar v-model:show="canlendarShow" type="range" @confirm="onConfirm" 
 color="#ee0a24" allow-same-day position="top"
 />
 <div class="list">
-    <div class="item">
+    <div class="item" v-for="item in userOrder.list" :key="item.id" @click="toinfo(item.id)">
         <div class="header">
-            <div class="status">订单状态：已下单</div>
-            <van-button type="primary" size="mini" color="#5075ff" @click="changeStatus" v-if="btnshow">修改为完成</van-button>
+            <div class="status">订单状态：
+              <span v-if="item.status === '0'">已下单</span>
+              <span v-if="item.status === '1'">已完成</span>
+            </div>
+            <van-button type="primary" size="mini" color="#5075ff" @click="changeStatus(item)" v-if="item.status === '0'">修改为完成</van-button>
         </div>
         <div class="body">
             <img src="../../assets/jpg/dsn.jpg" alt="" />
             <div class="info">
-                <div class="name">激流勇进</div>
-                <div class="desc">下单人：游客一</div>
-                <div class="desc">票数：3张</div>
-                <div class="desc">下单时间: 2024-04-30 11:50</div>
-                <div class="desc">导游: 导游一</div>
-                <div class="desc">导游带客: 激流勇进20240430001</div> 
+                <div class="name">{{ item.projectName }}</div>
+                <div class="desc">价格：￥{{ item.projectjiage }}/ 位</div>
+                <div class="desc">下单人：{{ item.person }}</div>
+                <div class="desc">数量：x {{ item.projectNum }}</div>
             </div>
             <div class="amt">
-                <div>￥300</div>
-            </div>
-        </div>  
-    </div>
-    <div class="item">
-        <div class="header">
-            <div class="status">订单状态：已完成</div>
-        </div>
-        <div class="body">
-            <img src="../../assets/jpg/dsn.jpg" alt="" />
-            <div class="info">
-                <div class="name">激流勇进</div>
-                <div class="desc">下单人：游客一</div>
-                <div class="desc">票数：3张</div>
-                <div class="desc">下单时间: 2024-04-30 11:50</div>
-                <div class="desc">入园时间: 2024-04-30 12:00</div>
-                <div class="desc">导游: 导游一</div>
-                <div class="desc">导游带客: 激流勇进20240430001</div> 
-            </div>
-            <div class="amt">
-                <div>￥300</div>
-            </div>
-        </div>  
-    </div>
-    <div class="item">
-        <div class="header">
-            <div class="status">订单状态：已完成</div>
-        </div>
-        <div class="body">
-            <img src="../../assets/jpg/dsn.jpg" alt="" />
-            <div class="info">
-                <div class="name">激流勇进</div>
-                <div class="desc">下单人：游客一</div>
-                <div class="desc">票数：3张</div>
-                <div class="desc">下单时间: 2024-04-30 11:50</div>
-                <div class="desc">入园时间: 2024-04-30 12:00</div>
-                <div class="desc">导游: 导游一</div>
-                <div class="desc">导游带客: 激流勇进20240430001</div> 
-            </div>
-            <div class="amt">
-                <div>￥300</div>
-            </div>
-        </div>  
-    </div><div class="item">
-        <div class="header">
-            <div class="status">订单状态：已完成</div>
-        </div>
-        <div class="body">
-            <img src="../../assets/jpg/dsn.jpg" alt="" />
-            <div class="info">
-                <div class="name">激流勇进</div>
-                <div class="desc">下单人：游客一</div>
-                <div class="desc">票数：3张</div>
-                <div class="desc">下单时间: 2024-04-30 11:50</div>
-                <div class="desc">入园时间: 2024-04-30 12:00</div>
-                <div class="desc">导游: 导游一</div>
-                <div class="desc">导游带客: 激流勇进20240430001</div> 
-            </div>
-            <div class="amt">
-                <div>￥300</div>
-            </div>
-        </div>  
-    </div>
-    <div class="item">
-        <div class="header">
-            <div class="status">订单状态：已完成</div>
-        </div>
-        <div class="body">
-            <img src="../../assets/jpg/dsn.jpg" alt="" />
-            <div class="info">
-                <div class="name">激流勇进</div>
-                <div class="desc">下单人：游客一</div>
-                <div class="desc">票数：3张</div>
-                <div class="desc">下单时间: 2024-04-30 11:50</div>
-                <div class="desc">入园时间: 2024-04-30 12:00</div>
-                <div class="desc">导游: 导游一</div>
-                <div class="desc">导游带客: 激流勇进20240430001</div> 
-            </div>
-            <div class="amt">
-                <div>￥300</div>
+                <div>￥{{ item.allAmount }}</div>
             </div>
         </div>  
     </div>
@@ -184,13 +112,14 @@ color="#ee0a24" allow-same-day position="top"
 .item {
   padding: 10px;
   background-color: #ffffff;
+  box-shadow:0 0 4px 0 rgba(0,0,0,0.1);
   border-radius: 6px;
   margin-bottom: 10px;
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     .header-left {
         flex-grow: 1;
         display: flex;
@@ -232,12 +161,12 @@ color="#ee0a24" allow-same-day position="top"
     }
   }
   .amt {
-    height: 100px;
+    height: 60px;
     color: #333333;
     font-weight: 600;
     font-size: 16px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
 }
 </style>

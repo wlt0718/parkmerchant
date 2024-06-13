@@ -16,11 +16,6 @@ const reviseMyInfo = () => {
         name: 'merchantRevise'
     })
 }
-const toexamineGuide = () => {
-    router.push({
-        name: 'examineGuide'
-    })
-}
 // 去我的项目
 const toMyproject = () =>{
     router.push({

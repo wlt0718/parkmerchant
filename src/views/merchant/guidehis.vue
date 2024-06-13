@@ -102,11 +102,10 @@ const data = ref([
     <template #right>
       <page-label radius type="success" v-if="item.status === 1">审核通过</page-label>
       <page-label radius type="warning" v-if="item.status === 0">暂未审核</page-label>
-      <page-label radius type="danger" v-if="item.status === 2">审核失败</page-label>
+      <page-label radius type="danger" v-if="item.status === 2">审核拒绝</page-label>
     </template>
   </page-hisbody>
 </div>
-<page-button type="primary" disabled>申请</page-button>
 </template>
 <style scoped lang="scss">
 .store {
