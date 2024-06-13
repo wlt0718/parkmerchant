@@ -1,1 +1,0 @@
-import{h as a}from"./index-4pUri2OV.js";import{o as n,b as h,w as u}from"./on-popup-reopen-ebgq6Xfv.js";import{r as m,G as p,K as s,B as c}from"./index-BRYTmIyP.js";const d=(i,r)=>{const o=m(),t=()=>{o.value=a(i).height};return p(()=>{if(s(t),r)for(let e=1;e<=3;e++)setTimeout(t,100*e)}),n(()=>s(t)),c([h,u],t),o};export{d as u};
