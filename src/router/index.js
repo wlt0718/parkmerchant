@@ -121,6 +121,14 @@ const routes = [
         }
     },
     {
+        path: '/orderinfo',
+        name: 'orderInfo',
+        component: () => import('@/views/mine/orderinfo.vue'),
+        meta: {
+            title: '订单详情'
+        }
+    },
+    {
         path: '/info',
         name: 'info',
         component: () => import('@/views/mine/info.vue'),

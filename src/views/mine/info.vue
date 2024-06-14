@@ -1,138 +1,54 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { userInfoStore } from '../../stores/user.js'
+import { userOrderListStore } from '../../stores/order.js'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-
-function toinfo(){
+const userOrder = userOrderListStore()
+function toinfo(id){
     router.push({
-        name: 'orderinfo',
+        path: '/orderinfo',
+        query: {
+          id: id
+        }
     })
 }
-const active = ref(2)
 </script>
 <template>
-<div class="header">
-  <div>带客流程</div>
-  <van-steps :active="active">
-    <van-step>导游下单</van-step>
-    <van-step>游客入场</van-step>
-    <van-step>商家审核</van-step>
-    <van-step>结算成功</van-step>
-  </van-steps>
+<div class="headeraaa">
   <div class="title">带客信息</div>
   <div>导游：导游一</div>
-  <div>项目：激流勇进</div>
-  <div>项目费用：60元/次</div>
-  <div>佣金比例：5%</div>
-  <div>带客人次：12次</div>
-  <div>佣金：4.5元</div>
-  <div>带客编号：激流勇进20240430001</div>
+  <div>带客游玩批次：1003202406060001</div>
 </div>
 <div class="tips">
     详情：
 </div>
-<div class="playlist">
-  <div class="list-item">
-    <div class="item-left">
-      <div class="item-left-i">
-        <span class="card-left">下单人：</span>
-        <span class="card-right">游客一</span>
-      </div>
-      <div class="item-left-i">
-        <span class="card-left">游玩人次：</span>
-        <span class="card-right">3 次</span>
-      </div>
-      <div class="item-left-i">
-        <span class="card-left">结算金额：</span>
-        <span class="card-right weight">1.5 元</span>
-      </div>
-      <div class="item-left-i time">
-        <span class="card-left">时间：</span>
-        <span class="card-right">2024年04月29日 11:30:30</span>
-      </div>
-    </div>
-    <div class="item-right">
-      <div class="status" style="color: #67c23a">已完成</div>
-      <!-- <div class="status" style="color: #E6A23C">已下单</div> -->
-    </div>
-  </div>
-  <div class="list-item">
-    <div class="item-left">
-      <div class="item-left-i">
-        <span class="card-left">下单人：</span>
-        <span class="card-right">游客二</span>
-      </div>
-      <div class="item-left-i">
-        <span class="card-left">游玩人次：</span>
-        <span class="card-right">3 次</span>
-      </div>
-      <div class="item-left-i">
-        <span class="card-left">结算金额：</span>
-        <span class="card-right weight">1.5 元</span>
-      </div>
-      <div class="item-left-i time">
-        <span class="card-left">时间：</span>
-        <span class="card-right">2024年04月29日 11:30:30</span>
+<div class="list">
+    <div v-for="item in userOrder.list" :key="item.id" >
+      <div v-if="item.guide && item.status === '0'" class="item" @click="toinfo(item.id)" >
+        <div class="header">
+            <div class="status">订单状态：
+              <span v-if="item.status === '0'">已下单</span>
+              <span v-if="item.status === '1'">已完成</span>
+            </div>
+        </div>
+        <div class="body">
+            <img src="../../assets/jpg/dsn.jpg" alt="" />
+            <div class="info">
+                <div class="name">{{ item.projectName }}</div>
+                <div class="desc">佣金：￥{{ item.yongjin }}</div>
+                <div class="desc">数量：x {{ item.projectNum }}</div>
+            </div>
+            <div class="amt">
+                <div>￥{{ item.jiesuan }}</div>
+            </div>
+        </div>  
       </div>
     </div>
-    <div class="item-right">
-      <div class="status" style="color: #67c23a">已完成</div>
-      <!-- <div class="status" style="color: #E6A23C">已下单</div> -->
-    </div>
-  </div>
-  <div class="list-item">
-    <div class="item-left">
-      <div class="item-left-i">
-        <span class="card-left">下单人：</span>
-        <span class="card-right">游客三</span>
-      </div>
-      <div class="item-left-i">
-        <span class="card-left">游玩人次：</span>
-        <span class="card-right">3 次</span>
-      </div>
-      <div class="item-left-i">
-        <span class="card-left">结算金额：</span>
-        <span class="card-right weight">1.5 元</span>
-      </div>
-      <div class="item-left-i time">
-        <span class="card-left">时间：</span>
-        <span class="card-right">2024年04月29日 11:30:30</span>
-      </div>
-    </div>
-    <div class="item-right">
-      <div class="status" style="color: #67c23a">已完成</div>
-      <!-- <div class="status" style="color: #E6A23C">已下单</div> -->
-    </div>
-  </div>
-  <div class="list-item">
-    <div class="item-left">
-      <div class="item-left-i">
-        <span class="card-left">下单人：</span>
-        <span class="card-right">游客四</span>
-      </div>
-      <div class="item-left-i">
-        <span class="card-left">游玩人次：</span>
-        <span class="card-right">3 次</span>
-      </div>
-      <div class="item-left-i">
-        <span class="card-left">结算金额：</span>
-        <span class="card-right weight">1.5 元</span>
-      </div>
-      <div class="item-left-i time">
-        <span class="card-left">时间：</span>
-        <span class="card-right">2024年04月29日 11:30:30</span>
-      </div>
-    </div>
-    <div class="item-right">
-      <div class="status" style="color: #67c23a">已完成</div>
-      <!-- <div class="status" style="color: #E6A23C">已下单</div> -->
-    </div>
-  </div>
 </div>
 </template>
 <style lang="scss" scoped>
-.header {
+.headeraaa {
     background-color: #fff;
     padding: 12px;
     font-size: 14px;
@@ -150,47 +66,67 @@ const active = ref(2)
     color: #666666;
     margin: 12px 12px 0;
 }
-.playlist {
-  margin: 12px;
+.list {
+    margin: 12px;
 }
-.list-item {
-  padding: 12px;
-  padding-bottom: 0;
-  background-color: #fff;
-  margin-bottom: 12px;
-  font-size: 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+.item {
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow:0 0 4px 0 rgba(0,0,0,0.1);
   border-radius: 6px;
-  box-shadow: 0 0 4px 1px rgba(0,0,0,0.1);
-  color: #666666;
-  .item-right {
-    flex-shrink: 0;
-    text-align: center;
-  }
-  .status {
-    border-radius: 6px;
-  }
-  .failtext {
-    margin-top: 10px;
-  }
-  .item-left {
-    width: 0;
-    flex-grow: 1;
+  margin-bottom: 10px;
+  .header {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    .header-left {
+        flex-grow: 1;
+        display: flex;
+        font-size: 16px;
+        color: #333;
+        font-weight: 600;
+        .name {
+            margin-right: 6px;
+        }
+    }
+    .status {
+        font-size: 14px;
+        color: #666;
+    }
+  }
+  .body {
+    display: flex;
+    align-items: flex-start;
+  }
+  img {
+    flex-shrink: 0;
+    width: 80px;
+    height: 70px;
+    margin-right: 12px;
+    border-radius: 6px;
+    display: block;
+  }
+  .info {
+    flex-grow: 1;
     font-size: 12px;
+    color: #333333;
+    .name {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    .desc {
+        color: #999999;
+        margin-bottom: 6px;
+    }
   }
-  .item-left-i {
-    width: 50%;
-    margin-bottom: 8px;
-  }
-  .item-left-i.time{
-    width: 100%;
-  }
-  .card-right.weight {
+  .amt {
+    height: 60px;
+    color: #333333;
     font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: flex-start;
   }
 }
 </style>
