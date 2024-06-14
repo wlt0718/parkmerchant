@@ -8,7 +8,7 @@ const popupShow = ref(false)
 const qrcodeValue = reactive({
   color: { dark: '#000000ff', light: '#ffffff' },
   type: 'image/png',
-  value: 'https://wlt0718.github.io/park-visitor/#/merchantinfo?type=m',
+  value: 'https://wlt0718.github.io/park-visitor/#/merchantinfo?type=m&merchant=0',
   width: 300
 })
 const reviseMyInfo = () => {
