@@ -16,6 +16,7 @@ const projectFrom = reactive({
 
 // 获取链接上的参数
 const { type = '0', id = '' } = route.query
+document.title = type === '0' ? '新增项目' : '修改项目'
 if (type === '0') {
   // 新增
 } else {
