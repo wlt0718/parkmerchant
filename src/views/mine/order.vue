@@ -81,7 +81,7 @@ color="#ee0a24" allow-same-day position="top"
               <span v-if="item.status === '0'">已下单</span>
               <span v-if="item.status === '1'">已完成</span>
             </div>
-            <van-button type="primary" size="mini" color="#5075ff" @click="changeStatus(item)" v-if="item.status === '0'">修改为完成</van-button>
+            <van-button type="primary" size="mini" color="#5075ff" @click.stop="changeStatus(item)" v-if="item.status === '0'">修改为完成</van-button>
         </div>
         <div class="body">
             <img src="../../assets/jpg/dsn.jpg" alt="" />
