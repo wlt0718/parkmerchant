@@ -9,7 +9,8 @@ const userInfo = reactive({
   mobile: '',
   password: '',
   confirmPassrowd: '',
-  smscode: ''
+  smscode: '',
+  name: ''
 })
 function register(){
   const { mobile, password, confirmPassrowd, smscode } = userInfo
@@ -73,8 +74,12 @@ function getSms(){
 </script>
 <template>
 <div class="login">
-  <div class="title">账号注册</div>
+  <div class="title">注册账号</div>
   <div class="from">
+    <div class="from-item">
+      <label for="name" class="from-label">名称</label>
+      <input id="name" class="from-input" type="text" placeholder="请输入商家名称" v-model="userInfo.name"/>
+    </div>
     <div class="from-item">
       <label for="mobile" class="from-label">手机号</label>
       <input id="mobile" class="from-input" type="tel" max="11" placeholder="请输入手机号" v-model="userInfo.mobile"/>

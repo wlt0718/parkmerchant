@@ -1,1 +1,0 @@
-import{C as o}from"./index-BRYTmIyP.js";const r=o("userInfoStore",{state:()=>({mobile:"",password:"",name:"上海欢乐谷"}),actions:{SET_mobile(e){this.mobile=e},SET_password(e){this.password=e},SET_name(e){this.name=e}}});export{r as u};
