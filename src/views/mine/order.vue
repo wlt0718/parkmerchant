@@ -47,6 +47,8 @@ function toinfo(id){
         }
     })
 }
+const payModeShow = ref(false)
+const id = ref('0')
 function changeStatus(item){
     showConfirmDialog({
       title: '提示',
@@ -54,12 +56,17 @@ function changeStatus(item){
         '是否将该订单设置为已完成？',
     })
       .then(() => {
-        userOrder.Set_list_status(item.id)
+        payModeShow.value = true
+        id.value = item.id
         // on confirm
       })
       .catch(() => {
         // on cancel
       });
+}
+function confirmorder(){
+  payModeShow.value = false
+  userOrder.Set_list_status(id.value)
 }
 </script>
 <template>
@@ -81,7 +88,7 @@ color="#ee0a24" allow-same-day position="top"
               <span v-if="item.status === '0'">已下单</span>
               <span v-if="item.status === '1'">已完成</span>
             </div>
-            <van-button type="primary" size="mini" color="#5075ff" @click.stop="changeStatus(item)" v-if="item.status === '0'">修改为完成</van-button>
+            <van-button type="primary" size="mini" color="#5075ff" @click.stop="changeStatus(item)" v-if="item.status === '0'">订单核销</van-button>
         </div>
         <div class="body">
             <img src="../../assets/jpg/dsn.jpg" alt="" />
@@ -97,6 +104,15 @@ color="#ee0a24" allow-same-day position="top"
         </div>  
     </div>
 </div>
+<van-overlay :show="payModeShow">
+<div class="paymode">
+  <div class="tips">请选择该游客的支付方式</div>
+  <div>
+    <div class="pay-item" @click="confirmorder('0')">现金支付</div>
+    <div class="pay-item" @click="confirmorder('1')">信用卡支付</div>
+  </div>
+</div>
+</van-overlay>
 </template>
 <style lang="scss" scoped>
 .list {
@@ -160,6 +176,35 @@ color="#ee0a24" allow-same-day position="top"
     font-size: 16px;
     display: flex;
     align-items: flex-start;
+  }
+}
+.paymode {
+  position: fixed;
+  top: 45%;
+  left: 0;
+  right: 0;
+  width: 70%;
+  background-color: #ffffff;
+  border-radius: 16px;
+  margin: 0 auto;
+  padding: 0 12px;
+  font-size: 16px;
+  color: #666666;
+  transform: translateY(-50%);
+  .tips {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+  .pay-item {
+    padding: 20px 0;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    &:last-child {
+      border-bottom: none;
+    }
   }
 }
 </style>
