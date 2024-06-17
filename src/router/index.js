@@ -136,6 +136,14 @@ const routes = [
             title: '带客详情'
         }
     },
+    {
+        path: '/setting',
+        name: 'setting',
+        component: () => import('@/views/setting/settingIndex.vue'),
+        meta: {
+            title: '设置'
+        }
+    },
 ]
 const router = createRouter({
     history: createWebHashHistory(),

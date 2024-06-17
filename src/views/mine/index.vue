@@ -42,6 +42,11 @@ function toOrder(){
         name: 'order'
     })
 }
+function toSetting(){
+    router.push({
+        name: 'setting'
+    })
+}
 </script>
 <template>
 <div class="header">
@@ -87,6 +92,11 @@ function toOrder(){
     <div class="nav-item"  @click="tojiesuanhis">
         <van-icon name="balance-o" class="left-icon" />
         <span>结算历史</span>
+        <van-icon name="arrow" class="right-icon" />
+    </div>
+    <div class="nav-item"  @click="toSetting">
+        <van-icon name="balance-o" class="left-icon" />
+        <span>设置</span>
         <van-icon name="arrow" class="right-icon" />
     </div>
 </div>

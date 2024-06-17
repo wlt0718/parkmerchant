@@ -43,7 +43,7 @@ function toRevise(){
 </script>
 <template>
 <div class="login">
-  <div class="title">欢迎使用（商家端）</div>
+  <div class="title">{{ $t('message.welcomeToUse') }}</div>
   <div class="from">
     <div class="from-item">
       <label for="mobile" class="from-label">
