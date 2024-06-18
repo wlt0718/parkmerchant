@@ -4,10 +4,10 @@ import { setVantLangurage } from './vantLangurage'
 
 let locale = ''
 if (storage.storageGet('locale')) {
-    locale = storage.storageGet('locale')
+  locale = storage.storageGet('locale')
 } else {
-    locale = 'en-US'
-    storage.storageSet('locale', 'en-US')
+  locale = 'en-US'
+  storage.storageSet('locale', 'en-US')
 }
 
 i18n.global.locale.value = locale

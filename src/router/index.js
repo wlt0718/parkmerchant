@@ -144,6 +144,14 @@ const routes = [
             title: '设置'
         }
     },
+    {
+        path: '/identify',
+        name: 'identify',
+        component: () => import('@/views/home/identify.vue'),
+        meta: {
+            title: '识别二维码'
+        }
+    },
 ]
 const router = createRouter({
     history: createWebHashHistory(),

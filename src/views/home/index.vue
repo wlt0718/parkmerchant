@@ -2,6 +2,7 @@
 import { userInfoStore } from '../../stores/user.js'
 import { showDialog, showConfirmDialog  } from 'vant';
 import { useRouter } from 'vue-router'
+import { QrcodeStream } from 'vue-qrcode-reader'
 const router = useRouter()
 const infoStore = userInfoStore()
 const userType = infoStore.userType
@@ -36,6 +37,12 @@ const toMyProject = () => {
         name: 'project'
     })
 }
+const tulisOff = () => {
+    router.push({
+        name: 'identify'
+    })
+}
+
 </script>
 <template>
 <div class="home">
@@ -68,13 +75,13 @@ const toMyProject = () => {
                 <img src="../../assets/svg/dysh.svg" alt=""  class="right-img" />
                 <span class="add-text">导游审核</span>
             </div>
-            <div class="main-right-item" @click="toMyProject">
+            <div class="main-right-item" @click="tulisOff">
                 <img src="../../assets/svg/ywsh.svg" alt=""  class="right-img" />
-                <span class="add-text">我的项目</span>
+                <span class="add-text">订单核销</span>
             </div>
        </div>
     </div>
-
+    <!-- <qrcode-stream @decode="onDecode" @init="onInit"></qrcode-stream> -->
 </div>
 </template>
 <style lang="scss" scoped>

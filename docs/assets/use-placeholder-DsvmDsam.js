@@ -1,0 +1,1 @@
+import{a}from"./use-route-BlmzrEbl.js";import{c as s}from"./index-C1ztbtdN.js";function u(t,o){const e=a(t,!0);return r=>s("div",{class:o("placeholder"),style:{height:e.value?`${e.value}px`:void 0}},[r()])}export{u};

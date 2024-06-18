@@ -95,7 +95,7 @@ function toSetting(){
         <van-icon name="arrow" class="right-icon" />
     </div>
     <div class="nav-item"  @click="toSetting">
-        <van-icon name="balance-o" class="left-icon" />
+        <van-icon name="setting-o" class="left-icon" />
         <span>设置</span>
         <van-icon name="arrow" class="right-icon" />
     </div>
