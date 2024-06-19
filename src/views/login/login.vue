@@ -1,16 +1,32 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { showDialog } from 'vant';
 import { useRouter } from 'vue-router'
 import { userInfoStore } from '../../stores/user.js'
+import storage from '../../utils/storage';
+import { setVantLangurage } from '../../utils/vantLangurage'
 const router = useRouter()
 const infoStore = userInfoStore()
+const { locale, t } = useI18n()
 function toRegister(){
   router.push({
     name: 'register'
   })
 }
-
+const languragePopShow = ref(false)
+const langurageValue = ref([storage.storageGet('locale')])
+const langurageList = [
+  { text: `${t('message.chinese')}`, value: 'zh-CN' },
+  { text: `${t('message.english')}`, value: 'en-US' },
+  { text: `${t('message.indonesia')}`, value: 'id-ID' },
+];
+const onConfirm = ({ selectedOptions }) => {
+  languragePopShow.value = false
+  locale.value = selectedOptions[0].value
+  storage.storageSet('locale', selectedOptions[0].value)
+  setVantLangurage(selectedOptions[0].value)
+};
 const fromInfo = reactive({
   mobile: '',
   password: ''
@@ -43,13 +59,14 @@ function toRevise(){
 </script>
 <template>
 <div class="login">
+  <div class="change-Lang"  @click="languragePopShow = true">{{ $t('message.switchLanguage') }}</div>
   <div class="title">{{ $t('message.welcomeToUse') }}</div>
   <div class="from">
     <div class="from-item">
       <label for="mobile" class="from-label">
         <img src="../../assets/icon/user.png" alt="" />
       </label>
-      <input id="mobile" class="from-input" type="number" max="11" placeholder="请输入手机号" v-model="fromInfo.mobile" />
+      <input id="mobile" class="from-input" type="number" max="11" :placeholder="t('tips.pepn')" v-model="fromInfo.mobile" />
     </div>
     <div class="from-item">
       <label for="password" class="from-label">
@@ -62,20 +79,39 @@ function toRevise(){
     <span>还没有账号？<span class="blue" @touchend="toRegister">立即注册</span></span>
     <span class="blue" @click="toRevise">忘记密码</span>
   </p>
-  <button type="button" class="btn" @click="login">登录</button>
+  <button type="button" class="btn" @click="login">{{ $t('message.login') }}</button>
 </div>
+<van-popup v-model:show="languragePopShow"
+  position="bottom"
+  round
+  :style="{height:'35%'}"
+>
+  <van-picker
+  v-model="langurageValue"
+  :columns="langurageList"
+  @cancel="languragePopShow = false"
+  @confirm="onConfirm"
+  />
+</van-popup>
 </template>
 
 <style scoped lang="scss">
 .login {
-  margin: 80px 20px 0;
+  margin: 0 20px 0;
   background-color: #f5f6f7;
   font-size: 14px;
+}
+.change-Lang {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: right;
+  color: var(--default-color);
 }
 .title {
   font-size: 24px;
   line-height: 1;
   margin-bottom: 50px;
+  margin-top: 60px;
 }
 .tips {
   margin-top: 12px;

@@ -6,8 +6,8 @@ let locale = ''
 if (storage.storageGet('locale')) {
   locale = storage.storageGet('locale')
 } else {
-  locale = 'en-US'
-  storage.storageSet('locale', 'en-US')
+  locale = navigator.language
+  storage.storageSet('locale', locale)
 }
 
 i18n.global.locale.value = locale
