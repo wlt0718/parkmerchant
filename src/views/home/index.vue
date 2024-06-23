@@ -2,7 +2,6 @@
 import { userInfoStore } from '../../stores/user.js'
 import { showDialog, showConfirmDialog  } from 'vant';
 import { useRouter } from 'vue-router'
-import { QrcodeStream } from 'vue-qrcode-reader'
 const router = useRouter()
 const infoStore = userInfoStore()
 const userType = infoStore.userType
@@ -81,7 +80,7 @@ const tulisOff = () => {
             </div>
        </div>
     </div>
-    <!-- <qrcode-stream @decode="onDecode" @init="onInit"></qrcode-stream> -->
+
 </div>
 </template>
 <style lang="scss" scoped>

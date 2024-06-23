@@ -127,6 +127,7 @@ function examineno(){
 }
 </script>
 <template>
+<nav-bar />
 <div class="store">
     <template v-for="item in data" :key="item.id" >
     <div class="store-item" v-if="item.status === 0">

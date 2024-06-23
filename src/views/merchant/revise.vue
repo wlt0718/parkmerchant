@@ -22,6 +22,7 @@ function revise(){
 }
 </script>
 <template>
+<nav-bar />
 <div class="from">
     <div class="from-item">
         <label for="name" class="from-label">商家名称</label>

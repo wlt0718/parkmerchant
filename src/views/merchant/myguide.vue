@@ -83,6 +83,7 @@ function releaseGuide(){
 }
 </script>
 <template>
+<nav-bar />
 <div class="header">
     <div class="guide-num">导游共计：<span>{{ data.length }}</span> 位</div>
 </div>

@@ -208,6 +208,7 @@ function confirmExamine(){
 }
 </script>
 <template>
+<nav-bar />
 <van-sticky>
     <van-dropdown-menu>
         <van-dropdown-item v-model="checkGuide" :options="guideList" />

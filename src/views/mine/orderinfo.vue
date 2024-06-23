@@ -12,6 +12,7 @@ const data = userOrder.list.find(el => {
 })
 </script>
 <template>
+<nav-bar />
 <div class="header">
     <van-icon name="passed" />
     <span style="margin-left: 10px;">订单状态：

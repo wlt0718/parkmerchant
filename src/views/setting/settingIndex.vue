@@ -20,6 +20,7 @@ const onConfirm = ({ selectedOptions }) => {
 };
 </script>
 <template>
+<nav-bar />
 <div class="nav-list">
   <div class="nav-item" @click="languragePopShow = true">
     <van-icon name="exchange" class="left-icon" />

@@ -66,6 +66,7 @@ function alldelExamine(){
 }
 </script>
 <template>
+<nav-bar />
 <div class="page">
   <div class="project-list">
     <van-checkbox-group v-model="checkedResult" @change="checkedResultChange">

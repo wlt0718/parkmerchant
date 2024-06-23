@@ -15,6 +15,7 @@ function toinfo(id){
 }
 </script>
 <template>
+<nav-bar />
 <div class="headeraaa">
   <div class="title">带客信息</div>
   <div>导游：导游一</div>

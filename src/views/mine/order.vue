@@ -70,6 +70,7 @@ function confirmorder(){
 }
 </script>
 <template>
+<nav-bar />
 <van-sticky>
 <van-dropdown-menu active-color="#ee0a24">
   <van-dropdown-item v-model="value2" :options="option2" />

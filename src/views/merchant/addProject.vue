@@ -67,6 +67,7 @@ function addProject(){
 }
 </script>
 <template>
+<nav-bar />
 <div class="page">
   <div class="from">
     <div class="from-item">

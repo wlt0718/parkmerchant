@@ -133,6 +133,7 @@ const data = ref([
 ])
 </script>
 <template>
+<nav-bar />
 <van-dropdown-menu>
   <van-dropdown-item v-model="checkGuide" :options="guideList" />
   <van-dropdown-item v-model="checkStatus" :options="statusList" />

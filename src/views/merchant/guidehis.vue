@@ -86,6 +86,7 @@ const data = ref([
 ])
 </script>
 <template>
+<nav-bar />
 <van-dropdown-menu>
   <van-dropdown-item v-model="checkStatus" :options="statusList" />
   <van-dropdown-item v-model="checkDate" :options="dateList" @change="dateChange" />
