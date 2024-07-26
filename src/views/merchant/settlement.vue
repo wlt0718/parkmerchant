@@ -174,7 +174,7 @@ const jiesuanObj = reactive({
 function examine(){
     if(!checkedResult.value.length){
         showDialog({
-            title: '提示',
+            title: t('tips.tips0'),
             message: '您还没有选择结算列表'
         })
         return false

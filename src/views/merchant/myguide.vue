@@ -67,7 +67,7 @@ function checkedResultChange(value){
 // 解除导游
 function releaseGuide(){
     showConfirmDialog({
-        title: '提示',
+        title: t('tips.tips0'),
         message: `确认和您选择的导游解除关系？`,
         confirmButtonText: '确认',
         cancelButtonText: '取消',

@@ -44,7 +44,7 @@ function addProject(){
     data.yongjin = yongjin.value
     userMyPorject.SET_list_add(data)
     showConfirmDialog({
-      title: '提示',
+      title: t('tips.tips0'),
       confirmButtonColor: '#5075ff',
       message:
         `新增成功，是否返回到项目列表？`,
@@ -56,7 +56,7 @@ function addProject(){
     data.yongjin = yongjin.value
     userMyPorject.SET_list_change(data)
     showConfirmDialog({
-      title: '提示',
+      title: t('tips.tips0'),
       confirmButtonColor: '#5075ff',
       message:
         `修改成功，是否返回到项目列表？`,

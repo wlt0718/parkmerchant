@@ -51,7 +51,7 @@ const payModeShow = ref(false)
 const id = ref('0')
 function changeStatus(item){
     showConfirmDialog({
-      title: '提示',
+      title: t('tips.tips0'),
       message:
         '是否将该订单设置为已完成？',
     })

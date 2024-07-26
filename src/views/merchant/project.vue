@@ -53,7 +53,7 @@ function alldelExamine(){
       tips = tips + el.name + '、'
     })
     showConfirmDialog({
-      title: '提示',
+      title: t('tips.tips0'),
       confirmButtonColor: '#5075ff',
       message:
         `确认删除您选择的项目？`,

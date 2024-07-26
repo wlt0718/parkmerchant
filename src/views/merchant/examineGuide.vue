@@ -75,7 +75,7 @@ function examine(){
     })
     if(!checkList.length){
         showDialog({
-            title: '提示',
+            title: t('tips.tips0'),
             message: '您还没有选择导游'
         })
         return false
@@ -85,7 +85,7 @@ function examine(){
         checkName.push(el.guideName)
     })
     showConfirmDialog({
-        title: '提示',
+        title: t('tips.tips0'),
         message: `这将通过您所选中的导游的申请`,
         confirmButtonText: '通过',
         cancelButtonText: '取消',
@@ -103,7 +103,7 @@ function examineno(){
     })
     if(!checkList.length){
         showDialog({
-            title: '提示',
+            title: t('tips.tips0'),
             message: '您还没有选择导游'
         })
         return false
@@ -113,7 +113,7 @@ function examineno(){
         checkName.push(el.guideName)
     })
     showConfirmDialog({
-        title: '提示',
+        title: t('tips.tips0'),
         message: `这将拒绝您所选中的导游的申请!`,
         confirmButtonText: '确认',
         cancelButtonText: '取消',

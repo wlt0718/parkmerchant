@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { showDialog } from 'vant';
 import { useRouter } from 'vue-router'
@@ -16,11 +16,13 @@ function toRegister(){
 }
 const languragePopShow = ref(false)
 const langurageValue = ref([storage.storageGet('locale')])
-const langurageList = [
-  { text: `${t('message.chinese')}`, value: 'zh-CN' },
-  { text: `${t('message.english')}`, value: 'en-US' },
-  { text: `${t('message.indonesia')}`, value: 'id-ID' },
+const langurageList = computed(() => {
+  return  [
+  { text: t('langurage.chinese'), value: 'zh-CN' },
+  { text: t('langurage.english'), value: 'en-US' },
+  { text: t('langurage.indonesia'), value: 'id-ID' },
 ];
+})
 const onConfirm = ({ selectedOptions }) => {
   languragePopShow.value = false
   locale.value = selectedOptions[0].value
@@ -34,14 +36,14 @@ const fromInfo = reactive({
 function login(){
   if(!fromInfo.mobile || !fromInfo.password){
     showDialog({
-      title: '提示',
+      title: t('tips.tips0'),
       message: '请输入账号和密码'
     })
     return false
   }
   if(fromInfo.mobile !== infoStore.mobile || fromInfo.password !== infoStore.password ){
     showDialog({
-      title: '提示',
+      title: t('tips.tips0'),
       message: '账号或密码错误，请重新输入'
     })
     return false
@@ -59,27 +61,27 @@ function toRevise(){
 </script>
 <template>
 <div class="login">
-  <div class="change-Lang"  @click="languragePopShow = true">{{ $t('message.switchLanguage') }}</div>
+  <div class="change-Lang"  @click="languragePopShow = true">{{ $t('functions.switchLanguage') }}</div>
   <div class="title">{{ $t('message.welcomeToUse') }}</div>
   <div class="from">
     <div class="from-item">
       <label for="mobile" class="from-label">
         <img src="../../assets/icon/user.png" alt="" />
       </label>
-      <input id="mobile" class="from-input" type="number" max="11" :placeholder="t('tips.pepn')" v-model="fromInfo.mobile" />
+      <input id="mobile" class="from-input" type="number" max="11" :placeholder="t('tips.tips2')" v-model="fromInfo.mobile" />
     </div>
     <div class="from-item">
       <label for="password" class="from-label">
         <img src="../../assets/icon/lock.png" alt="" />
       </label>
-      <input id="password" class="from-input" type="password" placeholder="请输入密码" v-model="fromInfo.password"/>
+      <input id="password" class="from-input" type="password" :placeholder="t('tips.tips3')" v-model="fromInfo.password"/>
     </div>
   </div>
   <p class="tips">
-    <span>还没有账号？<span class="blue" @touchend="toRegister">立即注册</span></span>
-    <span class="blue" @click="toRevise">忘记密码</span>
+    <span>{{ $t('tips.tips11') }}<span class="blue" @touchend="toRegister">{{ $t('functions.register') }}</span></span>
+    <span class="blue" @click="toRevise">{{ $t('functions.forgotpw') }}</span>
   </p>
-  <button type="button" class="btn" @click="login">{{ $t('message.login') }}</button>
+  <button type="button" class="btn" @click="login">{{ $t('functions.login') }}</button>
 </div>
 <van-popup v-model:show="languragePopShow"
   position="bottom"

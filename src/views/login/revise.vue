@@ -1,8 +1,10 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import { useI18n } from 'vue-i18n'
 import { showDialog } from 'vant';
 import { useRouter } from 'vue-router'
 import { userInfoStore } from '../../stores/user.js'
+const { locale, t } = useI18n()
 const infoStore = userInfoStore()
 const router = useRouter()
 const userInfo = reactive({
@@ -34,24 +36,25 @@ function nextStep(){
   const { mobile, password, confirmPassrowd, smscode } = userInfo
   const regMobile = new RegExp(/^[0-9]{11}$/)
   if(!regMobile.test(mobile)){
+    console.log(t('tips.tips0'))
     showDialog({
-      title: '提示',
-      message: '请输入正确的手机号'
+      title: t('tips.tips0'),
+      message: t('tips.tips6')
     })
     return false
   }
   if(mobile !== infoStore.mobile){
     showDialog({
-      title: '提示',
-      message: '该手机号未注册'
+      title: t('tips.tips0'),
+      message: t('tips.tips10')
     })
     return false
   }
   const regSms = new RegExp(/^\d{6}$/)
   if(!regSms.test(smscode)){
     showDialog({
-      title: '提示',
-      message: '验证码格式不正确'
+      title: t('tips.tips0'),
+      message: t('tips.tips12')
     })
     return false
   }
@@ -62,21 +65,21 @@ function register(){
   const { mobile, password, confirmPassrowd, smscode } = userInfo
   if(!password){
     showDialog({
-      title: '提示',
-      message: '请输入密码'
+      title: t('tips.tips0'),
+      message: t('tips.tips3')
     })
     return false
   }
   if(password !== confirmPassrowd){
     showDialog({
-      title: '提示',
-      message: '两次密码不一样'
+      title: t('tips.tips0'),
+      message: t('tips.tips13')
     })
     return false
   }
   infoStore.SET_password(userInfo.password)
   showDialog({
-    message: '修改密码成功，去登录'
+    message: t('tips.tips14')
   }).then(()=>{
     router.replace({
       name: 'login'
@@ -90,11 +93,11 @@ function register(){
   <div class="from" v-if="step === '1'">
     <div class="from-item">
       <label for="mobile" class="from-label">手机号</label>
-      <input id="mobile" class="from-input" type="tel" max="11" placeholder="请输入手机号" v-model="userInfo.mobile"/>
+      <input id="mobile" class="from-input" type="tel" max="11" :placeholder="$t('tips.tips3')" v-model="userInfo.mobile"/>
     </div>
     <div class="from-item">
       <label for="smsCode" class="from-label">验证码</label>
-      <input id="smsCode" class="from-input" type="tel" max="6" placeholder="请输入手机验证码" v-model="userInfo.smscode"/>
+      <input id="smsCode" class="from-input" type="tel" max="6" :placeholder="$t('tips.tips5')" v-model="userInfo.smscode"/>
       <div class="sms">
         <span v-if="!smsIsSend" @click="getSms">{{ smsText }}</span>
         <span v-else>{{ smsCount }}秒</span>
@@ -105,13 +108,13 @@ function register(){
   <div class="from" v-else>
     <div class="from-item">
       <label for="password" class="from-label">密码</label>
-      <input id="password" class="from-input" type="password" placeholder="长度8到16位 仅限字母数字" v-model="userInfo.password" />
+      <input id="password" class="from-input" type="password" :placeholder="$t('tips.tips9')" v-model="userInfo.password" />
     </div>
     <div class="from-item">
       <label for="confirmPassword" class="from-label">确认密码</label>
-      <input id="confirmPassword" class="from-input" type="password" placeholder="请再次确认密码" v-model="userInfo.confirmPassrowd"/>
+      <input id="confirmPassword" class="from-input" type="password" :placeholder="$t('tips.tips7')" v-model="userInfo.confirmPassrowd"/>
     </div>
-    <button type="button" class="btn" @click="register">修改</button>
+    <button type="button" class="btn" @click="register">{{ $t('functions.modify') }}</button>
   </div>
   
 </div>
